@@ -28,7 +28,10 @@ namespace IdentityServer.Test
         {
             services.AddIdentityServer().AddDeveloperSigningCredential().
                 AddInMemoryApiResources(new List<ApiResource>()).
-                AddInMemoryClients(new List<Client>());
+                AddInMemoryClients(new List<Client>());//then go to this url https://localhost:44390/.well-known/openid-configuration
+
+
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
