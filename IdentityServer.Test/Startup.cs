@@ -50,7 +50,7 @@ namespace IdentityServer.Test
 
             app.UseIdentityServer();
             app.UseHttpsRedirection();
-            app.UseMvc();
+            app.UseMvcWithDefaultRoute();
         }
     }
 }
