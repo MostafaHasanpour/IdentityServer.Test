@@ -35,7 +35,7 @@ namespace IdentityServer.Test
             var migrationsAssembly = typeof(Startup).GetTypeInfo().Assembly.GetName().Name;
 
             services.AddIdentityServer().AddDeveloperSigningCredential().
-                AddTestUsers(IdentityData.GetUsers()).
+                //AddTestUsers(IdentityData.GetUsers()).
                 //AddInMemoryApiResources(IdentityData.GetResources()).
                 //AddInMemoryIdentityResources(IdentityData.GetIdentityResources()).
                 //AddInMemoryClients(IdentityData.GetClients());//then go to this url https://localhost:44390/.well-known/openid-configuration
@@ -116,9 +116,14 @@ namespace IdentityServer.Test
 
     public class ResourceOwnerValidator : IResourceOwnerPasswordValidator
     {
-        public Task ValidateAsync(ResourceOwnerPasswordValidationContext context)
+        public async Task ValidateAsync(ResourceOwnerPasswordValidationContext context)
         {
-            throw new NotImplementedException();
+            if (context.UserName == "user" && context.Password == "P@$$w0rd")
+                context.Result = new GrantValidationResult("1", authenticationMethod: "Custom");
+            else
+            {
+                context.Result = new GrantValidationResult(TokenRequestErrors.InvalidGrant);
+            }
         }
     }
 }
