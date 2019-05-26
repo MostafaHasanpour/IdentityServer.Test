@@ -23,7 +23,9 @@ namespace IdentityServer.Test
                 new Client()
                 {
                     ClientId="Postman",
-                    ClientSecrets=new []{new Secret("secret".ToSha256())}
+                    ClientSecrets=new []{new Secret("secret".ToSha256())},
+                    AllowedGrantTypes=GrantTypes.ImplicitAndClientCredentials,
+                    AllowedScopes=new []{ "api1"}
                 }
             };
         }
@@ -36,7 +38,7 @@ namespace IdentityServer.Test
                 {
                     Password="P@$$w0rd",
                     Username="user",
-                    SubjectId = "1",
+                    SubjectId = "3534df2b-e7c6-43b7-8ed5-c39d7283800b",
                 }
             };
         }
