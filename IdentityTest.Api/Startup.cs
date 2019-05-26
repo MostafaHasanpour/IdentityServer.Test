@@ -26,6 +26,11 @@ namespace IdentityTest.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddAuthentication("Bearer").AddIdentityServerAuthentication(option =>
+                {
+                    option.Authority = "https://localhost:5001";
+                    option.ApiName = "api1";
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
