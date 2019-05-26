@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using IdentityModel;
 using IdentityServer4.Models;
 using IdentityServer4.Test;
+using static IdentityServer4.IdentityServerConstants;
 
 namespace IdentityServer.Test
 {
@@ -16,7 +17,7 @@ namespace IdentityServer.Test
             };
         }
 
-        internal static IEnumerable<Client> GetClients()
+        public static IEnumerable<Client> GetClients()
         {
             return new List<Client>()
             {
@@ -26,11 +27,27 @@ namespace IdentityServer.Test
                     ClientSecrets=new []{new Secret("secret".ToSha256())},
                     AllowedGrantTypes=GrantTypes.ImplicitAndClientCredentials,
                     AllowedScopes=new []{ "api1"}
+                },
+                new Client
+                {
+                    ClientId = "mvc",
+                    ClientName = "MVC Client",
+
+                    AllowedGrantTypes = GrantTypes.Implicit,
+
+                    RedirectUris = { "https://localhost:6001/signin-oidc" },
+                    PostLogoutRedirectUris = { "https://localhost:6001/signout-callback-oidc" },
+
+                    AllowedScopes = new List<string>
+                    {
+                        StandardScopes.OpenId,
+                        StandardScopes.Profile
+                    },
                 }
             };
         }
 
-        internal static List<TestUser> GetUsers()
+        public static List<TestUser> GetUsers()
         {
             return new List<TestUser>()
             {
@@ -41,6 +58,16 @@ namespace IdentityServer.Test
                     SubjectId = "3534df2b-e7c6-43b7-8ed5-c39d7283800b",
                 }
             };
+        }
+
+        public static IEnumerable<IdentityResource> GetIdentityResources()
+        {
+            return new List<IdentityResource>
+                {
+                    new IdentityResources.OpenId(),
+                    new IdentityResources.Profile(),
+
+                };
         }
     }
 }
