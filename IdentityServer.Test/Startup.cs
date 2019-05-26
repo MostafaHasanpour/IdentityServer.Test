@@ -27,12 +27,12 @@ namespace IdentityServer.Test
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddIdentityServer().AddDeveloperSigningCredential().
-                AddTestUsers(new List<IdentityServer4.Test.TestUser>()
+                AddTestUsers(IdentityData.GetUsers()>()
                 {
                     new IdentityServer4.Test.TestUser(){SubjectId="64d83ae0-57f2-4ceb-843f-30cf30b50fd1", Username="user", Password= "P@$$w0rd"}
                 }).
-                AddInMemoryApiResources(new List<ApiResource>()).
-                AddInMemoryClients(new List<Client>());//then go to this url https://localhost:44390/.well-known/openid-configuration
+                AddInMemoryApiResources(IdentityData.GetResources()).
+                AddInMemoryClients(IdentityData.GetClients());//then go to this url https://localhost:44390/.well-known/openid-configuration
 
 
 
