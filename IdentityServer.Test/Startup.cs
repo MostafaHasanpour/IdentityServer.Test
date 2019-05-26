@@ -29,6 +29,7 @@ namespace IdentityServer.Test
             services.AddIdentityServer().AddDeveloperSigningCredential().
                 AddTestUsers(IdentityData.GetUsers()).
                 AddInMemoryApiResources(IdentityData.GetResources()).
+                AddInMemoryIdentityResources(IdentityData.GetIdentityResources()).
                 AddInMemoryClients(IdentityData.GetClients());//then go to this url https://localhost:44390/.well-known/openid-configuration
 
 
